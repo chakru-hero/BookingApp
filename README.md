@@ -2,15 +2,6 @@
 
 Welcome to the Home Stay Booking App, a full-stack application for booking accommodations. This project is built using the MERN (MongoDB, Express.js, React.js, Node.js) stack.
 
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Technologies](#technologies)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## Overview
 The Home Stay Booking App allows users to discover, view details, and book accommodations. It provides a seamless experience for hosts to list their properties and manage bookings.
 
