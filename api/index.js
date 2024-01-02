@@ -119,6 +119,7 @@ app.post('/upload', photosMiddleware.array('photos',100),(req,res)=>{
     res.json(uploadedFiles);
 })
 
+
 function getFilename(fullPath) {
     return fullPath.replace(/^.*[\\\/]/, '');
   }
