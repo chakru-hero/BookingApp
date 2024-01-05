@@ -28,6 +28,14 @@ export default function PlacesFormPage(){
         axios.get('/places/' + id).then(
             response =>{
                 const {data} = response;
+                setTitle(data.title);
+                setAddress(data.address);
+                setAddedPhotos(data.photos);
+                setDescription(data.description);
+                setPerks(data.perks);
+                setExtraInfo(data.extraInfo);
+                setCheckIn(data.checkIn);
+                setCheckOut(data.checkOut);   
             }
         );
 
