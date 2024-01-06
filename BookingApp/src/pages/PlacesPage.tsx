@@ -3,19 +3,14 @@ import { Link } from "react-router-dom";
 import AccountNav from "../components/AccountNav";
 import { useEffect, useState } from "react";
 import axios from "axios";
-interface Place {
-    _id: string;
-    description: string;
-    photos: any;
-    title: string;
+import { Place } from "../models/Place";
 
-}
 export default function PlacesPage() {
 
     const [places, setPlaces] = useState<Place[]>([]);
 
     useEffect(() => {
-        axios.get('/places').then(({ data }) => {
+        axios.get('/user-places').then(({ data }) => {
             setPlaces(data);
         });
     }, []);
