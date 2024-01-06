@@ -36,15 +36,16 @@ export default function PlacesFormPage(){
                 setExtraInfo(data.extraInfo);
                 setCheckIn(data.checkIn);
                 setCheckOut(data.checkOut);   
+                setMaxGuests(data.maxGuests);
             }
         );
 
     },[id]);
 
 
-    async function addNewPlace(ev: React.FormEvent) {
+    async function savePlace(ev: React.FormEvent) {
         ev.preventDefault();
-        await axios.post('/places', {
+        const placeData = {
             title,
             address,
             addedPhotos,
@@ -54,8 +55,20 @@ export default function PlacesFormPage(){
             checkIn,
             checkOut,
             maxGuests
-        });
-      setRedirect(true);
+        }
+        if(id){
+            await axios.put('/places', {
+                id,
+               ...placeData
+            });
+            setRedirect(true);
+        }
+        else{
+            await axios.post('/places', placeData);
+            setRedirect(true);
+
+        }
+       
     }
 
     function inputHeader(text: String) {
@@ -84,7 +97,7 @@ export default function PlacesFormPage(){
     return (
         <div>
             <AccountNav/>
-        <form onSubmit={addNewPlace}>
+        <form onSubmit={savePlace}>
             {preInput('Title', 'Title for your place, make it something short and catchy.')}
             <input type="text" value={title} onChange={ev => setTitle(ev.target.value)} placeholder="My Lovely Apartment"></input>
             {preInput('Address', 'Full and complete that makes it easier to find!')}
