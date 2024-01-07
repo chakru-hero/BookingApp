@@ -181,6 +181,12 @@ app.put('/places', async(req,res)=>{
 
 app.get('/places', async (req,res)=>{
  res.json(await Place.find());
-})  
+});
+
+app.post('/booking', (req,res)=>{
+    const {place,checkIn,checkOut,numberOfGuests,mobile} 
+    = req.body;
+    
+});
 
 app.listen(4000);
