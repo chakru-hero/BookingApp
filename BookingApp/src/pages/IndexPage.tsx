@@ -4,6 +4,8 @@ import { Place } from "../models/Place";
 import { Link } from "react-router-dom";
 
 export default function IndexPage() {
+  const EU = import.meta.env.VITE_REACT_APP_expressUrl;
+
 
   const [places, setPlaces] = useState<Place[]>([]);
 
@@ -23,7 +25,7 @@ export default function IndexPage() {
         <Link to={'/place/' + place._id}>
           <div className="bg-gray-500 mb-2 rounded-2xl flex">
             {place.photos?.[0] && (
-              <img className=" object-cover rounded-2xl aspect-square" src={'http://localhost:4000/uploads/places/'+place.photos?.[0]}/>
+              <img className=" object-cover rounded-2xl aspect-square" src={`${EU}/uploads/places/`+place.photos?.[0]}/>
             )}
           </div>
           <h2 className="font-bold">{place.address}</h2>

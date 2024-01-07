@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Place } from "../models/Place";
 
 export default function  PlaceGallery({place}:{place : Place}){
+    const EU = import.meta.env.VITE_REACT_APP_expressUrl;
+
     const [showAllPhotos, setShowAllPhotos] = useState(false);
 
     if (showAllPhotos) {
@@ -34,7 +36,7 @@ export default function  PlaceGallery({place}:{place : Place}){
                     {place?.photos?.length > 0 &&
                         place.photos.map((photo: string) => (
                             <div>
-                                <img src={"http://localhost:4000/uploads/places/" + photo} />
+                                <img src={`${EU}/uploads/places/` + photo} />
                             </div>
                         ))}
                 </div>
@@ -50,7 +52,7 @@ export default function  PlaceGallery({place}:{place : Place}){
                                 <img onClick={()=> setShowAllPhotos(true)}
                                     className="aspect-square cursor-pointer object-cover"
                                     src={
-                                        "http://localhost:4000/uploads/places/" + place.photos[0]
+                                        `${EU}/uploads/places/` + place.photos[0]
                                     }
                                 ></img>
                             </div>
@@ -60,7 +62,7 @@ export default function  PlaceGallery({place}:{place : Place}){
                         {place.photos?.[1] && (
                                 <img onClick={()=> setShowAllPhotos(true)}
                                 className="aspect-square cursor-pointer object-cover"
-                                src={"http://localhost:4000/uploads/places/" + place.photos[1]}
+                                src={`${EU}/uploads/places/` + place.photos[1]}
                             ></img>
                         )}
                         <div className="overflow-hidden">
@@ -68,7 +70,7 @@ export default function  PlaceGallery({place}:{place : Place}){
                                 <img onClick={()=> setShowAllPhotos(true)}
                                 className="aspect-square cursor-pointer object-cover relative top-2"
                                     src={
-                                        "http://localhost:4000/uploads/places/" + place.photos[2]
+                                        `${EU}/uploads/places/` + place.photos[2]
                                     }
                                 ></img>
                             )}
