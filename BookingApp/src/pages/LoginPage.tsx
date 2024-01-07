@@ -16,7 +16,6 @@ export default function LoginPage() {
         try {
             const response = await axios.post('/login',{email, password});
             setUser(response.data);
-            // alert('Login Success');
             if( (response).status==200){
               setRedirect(true);
             }
@@ -30,7 +29,6 @@ export default function LoginPage() {
     if(redirect){
         return <Navigate to={'/'}/>
     }
-
     return (
         <div className="mt-4 grow flex items-center justify-around">
             <div className="mb-64">

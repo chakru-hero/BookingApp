@@ -13,9 +13,11 @@ import PlacesFormPage from './pages/PlacesFormPage'
 import PlacePage from './pages/PlacePage'
 import BookingsPage from './pages/BookingsPage'
 import { BookingPage } from './pages/BookingPage'
+ 
 
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = import.meta.env.VITE_REACT_APP_expressUrl;
 axios.defaults.withCredentials = true;
+
 
 function App() {
 

@@ -21,7 +21,7 @@ export default function BookingsPage() {
                 {bookings?.length > 0 && bookings.map((booking) => (
                     <Link to={`/account/bookings/${booking._id}`} 
                     className="flex gap-4 bg-gray-100 rounded-2xl overflow-hidden my-4">
-                        <div className="flex w-32 h-full shrink-0">
+                        <div className="flex w-32 h-32  shrink-0">
                             <PlaceImg place={booking.place} />
                         </div>
                         <div className="py-3 grow pr-3">
