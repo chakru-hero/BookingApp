@@ -4,6 +4,7 @@ import AccountNav from "../components/AccountNav";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Place } from "../models/Place";
+import PlaceImg from "../components/PlaceImg";
 
 export default function PlacesPage() {
 
@@ -28,11 +29,12 @@ export default function PlacesPage() {
             </div>
             <div className="mt-4">
                 {places.length > 0 && places.map((place, index) => (
-                    <Link to={'/account/places/'+place._id} key={index} className="flex cursor-pointer gap-4 bg-gray-100 p-4 rounded-2xl">
-                        <div className="flex w-32 h-32 bg-gray-300 shrink-0">
-                            {place.photos.length > 0 && (
-                                <img className="object-cover" src={'http://localhost:4000/uploads/places/'+place.photos[0]} alt = "" />
-                            )}
+
+                    <Link to={'/account/places/'+place._id} key={index} 
+                    className="mb-8 cursor-pointer flex gap-4 bg-gray-100 rounded-2xl overflow-hidden">
+                        
+                        <div className="flex w-32 h-full shrink-0">
+                            <PlaceImg place={place} />
                         </div>
                         <div className="grow-0 shrink">
                             <h2 className="text-xl">{place.title}</h2>

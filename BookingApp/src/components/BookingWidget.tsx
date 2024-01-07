@@ -1,19 +1,49 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Place } from "../models/Place";
 import { differenceInCalendarDays } from "date-fns";
+import axios from "axios";
+import { Navigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
 export default function BookingWidget({ place }: { place: Place }) {
 
     const[checkIn, setCheckIn] = useState('');
     const [checkOut,setCheckOut] = useState('');
-    const [numberOfGuests,setNumberOfGuests] = useState(1);
+    const [numberOfGuests,setNumberOfGuests] = useState('1');
     const [name,setName] = useState('');
     const [mobile,setMobile] = useState('');
+    const [redirect,setRedirect] = useState('');
+   const {user} =  useContext(UserContext);
+
+   useEffect(()=>{
+    if(user){
+        setName(user.name);
+    }
+   },[user])
+
     let numberOfNights = 0;
     if(checkIn && checkOut){
         numberOfNights = differenceInCalendarDays(new Date(checkOut),new Date(checkIn));
     }
+
+   async function bookThisPlace(){
+        const response = await axios.post('/booking',{
+        checkIn, 
+        checkOut,
+        numberOfGuests,
+        name,
+        mobile,
+        place: place._id,
+        price : numberOfNights * place.price,
+    });
+    const bookingId = response.data._id;
+    setRedirect(`/account/bookings/${bookingId}`);
+
+    }
         
+    if(redirect){
+        return <Navigate to={redirect}/>
+    }
 
     return (
 
@@ -35,7 +65,7 @@ export default function BookingWidget({ place }: { place: Place }) {
                 <div>
                     <div className=" py-3 px-4 border-l">
                         <label>Number of guests:</label>
-                        <input type="number" value={numberOfGuests} onChange={ev=> setNumberOfGuests(ev.target.valueAsNumber)}></input>
+                        <input type="number" value={numberOfGuests} onChange={ev=> setNumberOfGuests(ev.target.value)}></input>
                     </div>
                 </div>
                 {numberOfNights >0 &&  (
@@ -48,7 +78,7 @@ export default function BookingWidget({ place }: { place: Place }) {
                   </div>
                 )}
             </div>
-            <button className="primary mt-4">
+            <button onClick={bookThisPlace} className="primary mt-4">
                 Book this place 
                 {numberOfNights > 0 && (
                     <span> ${numberOfNights * place.price}</span>

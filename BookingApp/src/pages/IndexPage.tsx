@@ -8,12 +8,14 @@ export default function IndexPage() {
   const [places, setPlaces] = useState<Place[]>([]);
 
   useEffect(() => {
-
-    axios.get('/places').then(response => {
-      setPlaces(response.data);
-    });
-
-  });
+    axios.get('/places')
+      .then(response => {
+        setPlaces(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching places:', error);
+      });
+  }, []);
 
   return (
     <div className="mt-8 gap-x-6 gap-y-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
